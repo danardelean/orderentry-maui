@@ -1,0 +1,92 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<ContentPage xmlns="http://schemas.microsoft.com/dotnet/2021/maui"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:vm="clr-namespace:OrderEntry.ViewModel"
+             xmlns:helpers="clr-namespace:OrderEntry.Helpers"
+             x:Class="OrderEntry.View.OrderPage"
+             Title="{Binding Title}"
+             x:DataType="vm:OrderViewModel">
+    <Grid
+        RowDefinitions="Auto,*"
+        RowSpacing="24"
+        Padding="12">
+
+        <ImageButton
+            CornerRadius="8"
+            Padding="24,12"
+            VerticalOptions="Start"
+            HorizontalOptions="End"
+            BackgroundColor="{StaticResource Primary}"
+            Command="{Binding NavigateToScanPageCommand}">
+            <ImageButton.Source>
+                <FontImageSource
+                    FontFamily="MaterialDesignIcons"
+                    Glyph="{x:Static helpers:MaterialDesignIcons.BarcodeScan}"
+                    Size="36"
+                    Color="White"/>
+            </ImageButton.Source>
+        </ImageButton>
+
+        <CollectionView
+            Grid.Row="1"
+            ItemsSource="{Binding OrderRows}">
+            <CollectionView.ItemTemplate>
+                <DataTemplate
+                    x:DataType="vm:OrderRowViewModel">
+                    <Grid
+                        Padding="0,12"
+                        ColumnDefinitions="*,Auto,Auto,Auto,Auto"
+                        ColumnSpacing="12">
+                        <Label
+                            FontSize="Large"
+                            VerticalOptions="Center"
+                            Text="{Binding Product.Description}"/>
+                        <Button
+                            Grid.Column="1"
+                            Style="{StaticResource RoundButton}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:OrderViewModel}}, Path=IncrementProductCommand}"
+                            CommandParameter="{Binding}"
+                            ImageSource="add"/>
+
+                        <Entry
+                            Grid.Column="2"
+                            WidthRequest="70"
+                            Text="{Binding Qty}"
+                            IsReadOnly="True"
+                            FontSize="Large"
+                            HorizontalTextAlignment="Center"
+                            VerticalTextAlignment="Center"
+                            VerticalOptions="Fill"/>
+
+                        <Button
+                            Grid.Column="3"
+                            Style="{StaticResource RoundButton}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:OrderViewModel}}, Path=DecrementProductCommand}"
+                            CommandParameter="{Binding}"
+                            ImageSource="remove"/>
+
+                        <Button
+                            Grid.Column="4"
+                            Style="{StaticResource RoundButton}"
+                            Command="{Binding Source={RelativeSource AncestorType={x:Type vm:OrderViewModel}}, Path=DeleteProductCommand}"
+                            CommandParameter="{Binding}"
+                            ImageSource="delete"/>
+                    </Grid>
+                </DataTemplate>
+            </CollectionView.ItemTemplate>
+
+        </CollectionView>
+        <BoxView
+            Margin="-12"
+            Grid.RowSpan="2"
+            Background="{AppThemeBinding Light={StaticResource Black}, Dark={StaticResource White}}"
+            Opacity="0.3"
+            IsVisible="{Binding IsBusy}"/>
+        <ActivityIndicator
+            Grid.RowSpan="2"
+            VerticalOptions="Center"
+            HorizontalOptions="Center"
+            IsRunning="True"
+            IsVisible="{Binding IsBusy}"/>
+    </Grid>
+</ContentPage>
