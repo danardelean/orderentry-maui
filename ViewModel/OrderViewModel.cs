@@ -76,9 +76,19 @@ public partial class OrderViewModel:BaseViewModel, IQueryAttributable
             if (product != null)
                 OrderRows.Add(new OrderRowViewModel { Product = product, Qty = 1 });
             else
-            {
-                _dialogService.ShowMessageBox(AppResources.TitleError, string.Format(AppResources.ProductNotFound, barcode), AppResources.ButtonOk);
-            }
+                OrderRows.Add(new OrderRowViewModel
+                {
+                    Product = new Product
+                    {
+                        Barcode = barcode,
+                        Id=int.MaxValue,
+                        Description=AppResources.UnknownProduct
+                    },
+                    Qty=1
+                }) ;
+            //{
+            //    _dialogService.ShowMessageBox(AppResources.TitleError, string.Format(AppResources.ProductNotFound, barcode), AppResources.ButtonOk);
+            //}
         }
         IsBusy = false;
     }

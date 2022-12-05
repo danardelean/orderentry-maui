@@ -32,6 +32,8 @@
 
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Debug|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
+	  <CodesignProvision>Automatic</CodesignProvision>
+	  <CodesignKey>iPhone Developer</CodesignKey>
 	</PropertyGroup>
 	<PropertyGroup Condition="'$(Configuration)|$(TargetFramework)|$(Platform)'=='Release|net7.0-ios|AnyCPU'">
 	  <CreatePackage>false</CreatePackage>
@@ -68,4 +70,15 @@
 
 	
 
+	<ItemGroup>
+	  <EmbeddedResource Condition=" '$(EnableDefaultEmbeddedResourceItems)' == 'true' " Update="Resources\Localization\AppResources.resx">
+	    <Generator>ResXFileCodeGenerator</Generator>
+	    <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
+	  </EmbeddedResource>
+	</ItemGroup>
+	<ItemGroup>
+	  <Compile Condition=" '$(EnableDefaultCompileItems)' == 'true' " Update="Resources\Localization\AppResources.Designer.cs">
+	    <DependentUpon>AppResources.resx</DependentUpon>
+	  </Compile>
+	</ItemGroup>
 </Project>

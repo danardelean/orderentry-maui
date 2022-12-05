@@ -73,4 +73,7 @@
    <data name="ProductNotFound" xml:space="preserve">
     <value>No product found with the barcode {0}</value>
   </data>
+   <data name="UnknownProduct" xml:space="preserve">
+    <value>Unknown product</value>
+  </data>
 </root>

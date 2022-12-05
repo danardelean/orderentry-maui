@@ -113,4 +113,7 @@
    <data name="ProductNotFound" xml:space="preserve">
     <value>Није пронађен ниједан производ са бар кодом {0}</value>
   </data>
+  <data name="UnknownProduct" xml:space="preserve">
+    <value>Непознати производ</value>
+  </data>
 </root>

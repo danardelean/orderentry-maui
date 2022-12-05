@@ -101,5 +101,14 @@ namespace OrderEntry.Resources.Localization {
                 return ResourceManager.GetString("TitleProductScanPage", resourceCulture);
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized string similar to Unknown product.
+        /// </summary>
+        internal static string UnknownProduct {
+            get {
+                return ResourceManager.GetString("UnknownProduct", resourceCulture);
+            }
+        }
     }
 }

@@ -29,27 +29,36 @@
 
         <CollectionView
             Grid.Row="1"
+            
             ItemsSource="{Binding OrderRows}">
             <CollectionView.ItemTemplate>
                 <DataTemplate
                     x:DataType="vm:OrderRowViewModel">
                     <Grid
                         Padding="0,12"
-                        ColumnDefinitions="*,Auto,Auto,Auto,Auto"
+                        ColumnDefinitions="*,150,Auto,Auto,Auto,Auto"
                         ColumnSpacing="12">
                         <Label
-                            FontSize="Large"
+                            MaxLines="4"
+                            LineBreakMode="WordWrap"
+                            FontSize="Medium"
                             VerticalOptions="Center"
                             Text="{Binding Product.Description}"/>
-                        <Button
+                        <Label
                             Grid.Column="1"
+                            LineBreakMode="NoWrap"
+                            FontSize="Medium"
+                            VerticalOptions="Center"
+                            Text="{Binding Product.Barcode}"/>
+                        <Button
+                            Grid.Column="2"
                             Style="{StaticResource RoundButton}"
                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:OrderViewModel}}, Path=IncrementProductCommand}"
                             CommandParameter="{Binding}"
                             ImageSource="add"/>
 
                         <Entry
-                            Grid.Column="2"
+                            Grid.Column="3"
                             WidthRequest="70"
                             Text="{Binding Qty}"
                             IsReadOnly="True"
@@ -59,7 +68,7 @@
                             VerticalOptions="Fill"/>
 
                         <Button
-                            Grid.Column="3"
+                            Grid.Column="4"
                             Style="{StaticResource RoundButton}"
                             Command="{Binding Source={RelativeSource AncestorType={x:Type vm:OrderViewModel}}, Path=DecrementProductCommand}"
                             CommandParameter="{Binding}"

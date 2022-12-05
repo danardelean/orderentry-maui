@@ -1,5 +1,4 @@
-﻿
-namespace OrderEntry.Services;
+﻿namespace OrderEntry.Services;
 
 public class MockProductRepository : IProductRepository
 {
